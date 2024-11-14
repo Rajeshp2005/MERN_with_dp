@@ -1,0 +1,46 @@
+version of express= semanticVersioning [semVer{major.minor.ptach( "express": "^4.21.1")}]
+
+port number:0 to 65,536 where up to 1100 is used for computer's internal process which is called as internal port.
+mysql port no:3306
+localhost:3000
+127.0.0.1:3000
+line 5 and 6 are same don't confuse.
+nodemon:- for resolving the problem of tping node app.js for every code change.
+package.json file ko script ma start xa vaney npm start handa hunxa sun garda tara aru name xa vaney npm run name hannaparxa>>>
+//JSON:-why json(javascript object notation)??
+=>the syantax for different programming language is different .so to solve this problem we use json .when we use json it is universal.All the .programming language python java flutter can accept the data.
+=>the date sent from json will go serialize and simple .
+=>json is lightweigth so response time is faster.
+json is better than XML.
+use/work:
+1.store data;
+2.transfer of data.
+
+//Mongodb:- non sql dbms
+mongoose(odm):- npm package who is helping hand for mangodb, it is a agent to connect node js with Mongodb
+CRUD(create read updtae delete) implementation..: all the websites use curd implementation for ed facebook we can create post,read the post from other update the post delete the post...\
+//C=Create
+schema:table ma row colomn kasari hunupraxa teo dekhauxa..
+class Schema {
+  Schema(title){
+    console.log(title)
+  }
+}
+const schema= new Schema("Hello")
+this and this same:const Schema = mongoose.Schema;
+for post request
+body>raw>json
+pathayeko jati sabai data req.body ma aunxa 
+tara img,pdf haru chai req.file ma aunxa..
+///---imp resaon--//:
+express ley js bujhna sakdaina so post method ma garda express lai potential dina top ma "app.use(express.json());" code add garna parxa..
+react ma frontend nahuda ,laravel use gada "app.use(express.urlencode({extende:true}))"
+yedi key value same vayeo vaney create garda yeutavalue hakey hunxa
+jastai
+bookName:bookName ko thauma 
+bookName, matra kehda hunxa.
+jaba kunai kam garna time lagxa/databasema kunai pani operation hunxa hamiley teslai await dina parxa ra jaha await hunxa teha async funtion hunai praxa.
+mongodb ma collection banda ( const Book = mongoose.model("Name", bookSchema);) yeo codeko "Name" ko pural ra smallcase ma banxa ie "names".
+ //R=Read
+ read can be of two type 1.all data read(find()  .../book) 1.2.single read(findById() => pass the id in the body of req. .../book/:id) 
+ note: for dynamic nature of id we have to put isto(:) infront of id.
