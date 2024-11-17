@@ -44,3 +44,12 @@ mongodb ma collection banda ( const Book = mongoose.model("Name", bookSchema);) 
  //R=Read
  read can be of two type 1.all data read(find()  .../book) 1.2.single read(findById() => pass the id in the body of req. .../book/:id) 
  note: for dynamic nature of id we have to put isto(:) infront of id.
+ //D=delete
+ delete= findByIdAndDelete(id)
+ CSRF attack(Cross-Site Request Forgery):A CSRF attack tricks a user's web browser into performing an unwanted action on a trusted site. This can happen when a malicious website, email, blog, instant message, or program tricks the user's browser.
+ so use delete() instead of get() for deleteing ....
+ //U=updateupdate=findByIdAndUpdate(id)
+ REST and RESTFUL APIs:::
+ restful:yeuta standard ma baseyra api banaunu ..path same(/book) hunxa like book /book/id for delete update etc...// hamiley yesari lehxaum paxi..
+ router.route("/books/:id").patch().delete().update().
+rest api:path chai sementic hunxa like for delete /deletebook for update /updatebook ..

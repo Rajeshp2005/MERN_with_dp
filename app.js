@@ -53,6 +53,37 @@ app.get("/book/:id", async (req, res) => {
     data: book,
   });
 });
+//delete operation
+app.delete("/book/:id", async (req, res) => {
+  const { id } = req.params;
+  const book = await Book.findByIdAndDelete(id);
+  res.status(200).json({
+    message: "Book deleted successfully!!",
+  });
+});
+//update
+app.patch("/book/:id", async (req, res) => {
+  const { id } = req.params;
+  const {
+    bookName,
+    bookPrice,
+    isbnNumber,
+    authorName,
+    publishedAt,
+    publication,
+  } = req.body;
+  const book = await Book.findByIdAndUpdate(id, {
+    bookName,
+    bookPrice,
+    isbnNumber,
+    authorName,
+    publishedAt,
+    publication,
+  });
+  res.status(200).json({
+    message: "Book updated successfully!!",
+  });
+});
 app.listen(3000, () => {
   console.log("Nodejs server has started at port 3000");
 });
