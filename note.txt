@@ -53,3 +53,4 @@ mongodb ma collection banda ( const Book = mongoose.model("Name", bookSchema);) 
  restful:yeuta standard ma baseyra api banaunu ..path same(/book) hunxa like book /book/id for delete update etc...// hamiley yesari lehxaum paxi..
  router.route("/books/:id").patch().delete().update().
 rest api:path chai sementic hunxa like for delete /deletebook for update /updatebook ..
+send files (images, videos, documents) in node js....(Multer)

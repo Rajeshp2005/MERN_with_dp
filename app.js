@@ -1,8 +1,16 @@
 const express = require("express");
 const app = express();
+const fs = require("fs");
 const connectToDatabase = require("./db/index.js");
 const Book = require("./model/bookModel.js");
-
+//multerconfig imports
+const { multer, storage } = require("./middleware/multerConfig.js");
+const upload = multer({
+  storage: storage,
+  // limits: {
+  // fileSize: 5 * 1024 * 1024, // Set file size limit to 5mb
+  // },
+});
 //Alternative
 //const app = require('express')();
 app.use(express.json());
@@ -13,7 +21,15 @@ app.get("/", (req, res) => {
   });
 });
 //C api among CURD
-app.post("/book", async (req, res) => {
+app.post("/book", upload.single("image"), async (req, res) => {
+  let fileName;
+  if (!req.file) {
+    fileName =
+      "https://images.unsplash.com/photo-1731332066050-47efac6e884f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw4fHx8ZW58MHx8fHx8";
+  } else {
+    fileName = "htpp://localhost:3000/" + req.file.filename;
+  }
+
   const {
     bookName,
     bookPrice,
@@ -29,6 +45,7 @@ app.post("/book", async (req, res) => {
     authorName,
     publishedAt,
     publication,
+    imageUrl: fileName,
   });
   res.status(201).json({
     message: "Book created successfully",
@@ -54,16 +71,32 @@ app.get("/book/:id", async (req, res) => {
   });
 });
 //delete operation
-app.delete("/book/:id", async (req, res) => {
+app.delete("/book/:id", upload.single("image"), async (req, res) => {
   const { id } = req.params;
   const book = await Book.findByIdAndDelete(id);
+
   res.status(200).json({
     message: "Book deleted successfully!!",
   });
 });
 //update
-app.patch("/book/:id", async (req, res) => {
+app.patch("/book/:id", upload.single("image"), async (req, res) => {
   const { id } = req.params;
+  const oldData = await Book.findById(id);
+  let fileName;
+  if (req.file) {
+    const oldImagePath = oldData.imageUrl;
+    const localHostUrlLength = "http://localhost:3000/".length;
+    const newOldImagePath = oldImagePath.slice(localHostUrlLength);
+    fs.unlink(`./storage/${newOldImagePath}`, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("file deleted successfully");
+      }
+    });
+    fileName = "http://localhost:3000/" + req.file.filename;
+  }
   const {
     bookName,
     bookPrice,
@@ -79,11 +112,13 @@ app.patch("/book/:id", async (req, res) => {
     authorName,
     publishedAt,
     publication,
+    imageUrl: fileName,
   });
   res.status(200).json({
     message: "Book updated successfully!!",
   });
 });
+app.use(express.static("./storage"));
 app.listen(3000, () => {
   console.log("Nodejs server has started at port 3000");
 });
