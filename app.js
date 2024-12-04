@@ -11,6 +11,13 @@ const upload = multer({
   // fileSize: 5 * 1024 * 1024, // Set file size limit to 5mb
   // },
 });
+// cors package 
+const cors = require('cors')
+
+
+app.use(cors({
+    origin : "*"
+}))
 //Alternative
 //const app = require('express')();
 app.use(express.json());

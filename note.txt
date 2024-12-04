@@ -54,3 +54,63 @@ mongodb ma collection banda ( const Book = mongoose.model("Name", bookSchema);) 
  router.route("/books/:id").patch().delete().update().
 rest api:path chai sementic hunxa like for delete /deletebook for update /updatebook ..
 send files (images, videos, documents) in node js....(Multer)
+axios:api browser ma hit garauney agent ho
+in react: npm i axios
+CORS:NPM CORS. Cross-Origin Resource Sharing (CORS) is a fundamental security mechanism implemented by web browsers to prevent unauthorized access to resources on a web page from different origins
+
+why we need it?
+CSRF (cross site request forgey)  yeuta siteko data or cookie haru lai  arko site ma access garna paunuho...
+xss
+SOP(Same origin policy):this is bakwas policy;saab nai blacklist ma hunxa
+
+current origin-jun website ho
+cross origin-jun api hit hannu xa;
+rule between current origin and cross origin:
+should have same protocol(http or https),port,hostname.
+CORS(cross origin resource sharing): blacklist ra whitelist huxa kunlai allow garney kunlai nagarney..
+whitelist ma rakhda yedi universal banauna xa vaney * use garney
+by default kunai pani connect hunna hamiley api lai connect huna access dina parxa * sign rakheyra.
+    onChange={(e) => setImage(e.target.files[0])} for accesing the single files 
+    when posting the data from frontend to backend:
+    1st way:
+    const AddBook = () => {
+  const [bookName, setBookName] = useState("");
+  const [bookPrice, setBookPrice] = useState("");
+  const [isbnNumber, setIsbnNumber] = useState(null);
+  const [authorName, setAuthorName] = useState("");
+  const [publishedAt, setPublishedAt] = useState("");
+  const [publication, setPublication] = useState("");
+  const [image, setImage] = useState(null);
+  const [description, setDescription] = useState("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('bookName',bookName)
+    formData.append('bookPrice',bookPrice)
+    formData.append('isbnNumber',isbnNumber)
+    formData.append('authorName',authorName)
+    formData.append('publishedAt',publishedAt)
+    formData.append('publication',publication)
+    formData.append('image',image)
+    formData.append('description',description)
+    const response = await axios.post("http://localhost:3000/book", formData);
+  };
+  in this the problem is we have to make multiple state this take lot of time so not the good way..
+  second way:
+  const [data,setData]=useState({
+  bookName:'',
+  bookPrice:null,
+  isbnNumber:null,
+  authorName:'',
+  publishedAt:null,
+  publication:'',
+  decription:'',
+})
+const handelChange =(e)=>{
+const{name,value}=(e.target)
+setData({
+  ...data,//... operator ley agadi j xa xodey vanna khojeyko ho //vannaley agadi input garisakeyko data preserve garx new coming datalai matra change garxa do console.log(data) to view what actually is happening..
+  [name]:value
+})
+}
+const [image, setImage] = useState(null);
