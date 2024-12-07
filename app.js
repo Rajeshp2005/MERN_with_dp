@@ -105,7 +105,7 @@ app.patch("/book/:id", upload.single("image"), async (req, res) => {
         console.log("file deleted successfully");
       }
     });
-    fileName = "https://mern-with-dp.onrender.com/" + req.file.filename;
+    fileName = "https://mern-with-dp.onrender.com/"+ req.file.filename;
   }
   const {
     bookName,
