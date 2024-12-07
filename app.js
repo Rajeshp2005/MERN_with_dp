@@ -11,13 +11,14 @@ const upload = multer({
   // fileSize: 5 * 1024 * 1024, // Set file size limit to 5mb
   // },
 });
-// cors package 
-const cors = require('cors')
+// cors package
+const cors = require("cors");
 
-
-app.use(cors({
-    origin : "*"
-}))
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 //Alternative
 //const app = require('express')();
 app.use(express.json());
@@ -34,7 +35,7 @@ app.post("/book", upload.single("image"), async (req, res) => {
     fileName =
       "https://images.unsplash.com/photo-1731332066050-47efac6e884f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw4fHx8ZW58MHx8fHx8";
   } else {
-    fileName = "htpp://localhost:3000/" + req.file.filename;
+    fileName = "http://localhost:3000/" + req.file.filename;
   }
 
   const {
@@ -44,6 +45,7 @@ app.post("/book", upload.single("image"), async (req, res) => {
     authorName,
     publishedAt,
     publication,
+    description,
   } = req.body;
   await Book.create({
     bookName,
@@ -52,6 +54,7 @@ app.post("/book", upload.single("image"), async (req, res) => {
     authorName,
     publishedAt,
     publication,
+    description,
     imageUrl: fileName,
   });
   res.status(201).json({
@@ -110,6 +113,7 @@ app.patch("/book/:id", upload.single("image"), async (req, res) => {
     isbnNumber,
     authorName,
     publishedAt,
+    description,
     publication,
   } = req.body;
   const book = await Book.findByIdAndUpdate(id, {
@@ -119,6 +123,7 @@ app.patch("/book/:id", upload.single("image"), async (req, res) => {
     authorName,
     publishedAt,
     publication,
+    description,
     imageUrl: fileName,
   });
   res.status(200).json({
