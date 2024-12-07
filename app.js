@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const port = process.env.PORT || 4000;
 const fs = require("fs");
 const connectToDatabase = require("./db/index.js");
 const Book = require("./model/bookModel.js");
@@ -131,6 +132,6 @@ app.patch("/book/:id", upload.single("image"), async (req, res) => {
   });
 });
 app.use(express.static("./storage"));
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("Nodejs server has started at port 3000");
 });
