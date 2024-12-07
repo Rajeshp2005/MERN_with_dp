@@ -96,7 +96,7 @@ app.patch("/book/:id", upload.single("image"), async (req, res) => {
   let fileName;
   if (req.file) {
     const oldImagePath = oldData.imageUrl;
-    const localHostUrlLength = "http://localhost:3000/".length;
+    const localHostUrlLength = "https://mern-with-dp.onrender.com/".length;
     const newOldImagePath = oldImagePath.slice(localHostUrlLength);
     fs.unlink(`./storage/${newOldImagePath}`, (err) => {
       if (err) {
@@ -105,7 +105,7 @@ app.patch("/book/:id", upload.single("image"), async (req, res) => {
         console.log("file deleted successfully");
       }
     });
-    fileName = "http://localhost:3000/" + req.file.filename;
+    fileName = "https://mern-with-dp.onrender.com/" + req.file.filename;
   }
   const {
     bookName,
