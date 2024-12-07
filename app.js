@@ -35,7 +35,7 @@ app.post("/book", upload.single("image"), async (req, res) => {
     fileName =
       "https://images.unsplash.com/photo-1731332066050-47efac6e884f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw4fHx8ZW58MHx8fHx8";
   } else {
-    fileName = "http://localhost:3000/" + req.file.filename;
+    fileName = "https://mern-with-dp.onrender.com/" + req.file.filename;
   }
 
   const {
